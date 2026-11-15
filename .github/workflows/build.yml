@@ -45,6 +45,10 @@ jobs:
         run: |
           python3 "$GITHUB_WORKSPACE/tools/traducir_y_ajustes.py" ~/nxnative
 
+      - name: Parche - controles del usuario (estilo fábrica)
+        run: |
+          python3 "$GITHUB_WORKSPACE/tools/parche_controles_sparking.py" ~/nxnative
+
       - name: Descargar el juego desde la release privada
         env:
           GH_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
@@ -78,4 +82,4 @@ jobs:
           ls -la "$IPA"
           split -b 1900m "$IPA" ipa-part-
           PARTS=$(ls ipa-part-*)
-          gh release create sparking-ipa $PARTS --repo ShebasK0908/sparking-build --title "Sparking Zero IPA (privado)" --notes "Build propia del usuario desde su copia. No compartir." || gh release upload sparking-ipa $PARTS --clobber --repo ShebasK0908/sparking-build
+          gh release create sparking-ipa-v2 $PARTS --repo ShebasK0908/sparking-build --title "Sparking Zero IPA - controles nuevos (privado)" --notes "Build propia del usuario desde su copia, con sus controles. No compartir." || gh release upload sparking-ipa-v2 $PARTS --clobber --repo ShebasK0908/sparking-build
